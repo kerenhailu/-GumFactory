@@ -2,33 +2,29 @@ import React, { useContext } from "react";
 import { ContextCreate } from "../Context/ContextComp.Component";
 const CreateOrder = () => {
   const contextObj = useContext(ContextCreate);
-  function InputName(event) {
-    contextObj.nameAgent = { nameAgent: event.target.value };
-  }
-  function InputNumOrder(event) {
-    contextObj.NumOrder = { NumOrder: event.target.value };
-  }
-  function InputEmail(event) {
-    contextObj.email = { email: event.target.value };
-  }
+  
   function UpDateAgent() {
-    contextObj.setAgent(contextObj.nameAgent,contextObj.NumOrder,contextObj.email);
+    contextObj.setAgent({...contextObj.agent});
     alert(`the Order number ${contextObj.agent.NumOrder} seccess`);
   }
+//   פונקציה גנריצ
+const ChangeAgentInput=(event)=>{
+    contextObj.agent[event.target.name]=event.target.value;
+}
   return (
     <div>
       <h1>CreateOrder</h1>
       <label>name :</label>
       <br />
-      <input onChange={InputName} type="text" />
+      <input name="nameAgent" onChange={ChangeAgentInput} type="text" />
       <br />
       <label>number order :</label>
       <br />
-      <input onChange={InputNumOrder} type="text" />
+      <input name="NumOrder" onChange={ChangeAgentInput} type="number" />
       <br />
       <label>email :</label>
       <br />
-      <input onChange={InputEmail} type="text" />
+      <input name="email" onChange={ChangeAgentInput} type="text" />
       <br />
       <button onClick={UpDateAgent}>Send</button>
 
